@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+import CurrentNewStar from '../CurrentNewStar/CurrentNewStar';
+import StarList from '../StarList/StarList';
+import NewStarForm from '../NewStarForm/NewStarForm';
 
 class App extends Component {
   
@@ -41,7 +45,6 @@ class App extends Component {
     })
   }
 
-
   handleChangeFor = (propertyName) => {
    return (event) => {
       //save whats in the input on newStar.name
@@ -55,54 +58,17 @@ class App extends Component {
   }
 
   render() {
-
-    // let starListItemArray = [];
-    //ew
-    // for(let i = 0; i < this.state.starList.length; i++) {
-    //   starListItemArray.push(<li>{this.state.starList[i]}</li>)
-    // }
-
-    //eh, still pushing
-    // for(let star of this.state.starList) {
-    //   starListItemArray.push(<li>{star}</li>)
-    // }
-
-    //map! still pushing!
-    // this.state.starList.map( function(star) {
-    //   starListItemArray.push(<li>{star}</li>)
-    // })
-
-    //Better Map usage
-    // let starListItemArray = this.state.starList.map (function(star){
-    //   return <li>{star}</li>
-    // })
-
-    //best map usage
-    let starListItemArray = this.state.starList.map ((star, index) => {
-      return (
-        <li key={index}>
-          The star "{star.name}" is {star.diameter} million km in diameter.
-        </li>
-      )
-    })
-  
-
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <form onSubmit={this.handleSubmit}>
-
-          <input value={this.state.newStar.name} placeholder="star name" onChange={this.handleChangeFor('name')}/>
-          <input value={this.state.newStar.diameter} placeholder="diameter" onChange={this.handleChangeFor('diameter')}/>
-          <input type="submit"/>
-
-        </form>
-        <ul className="App-intro">
-          {starListItemArray}
-        </ul>
+        <Header />
+        <CurrentNewStar currentStar={this.state.newStar} />
+        <NewStarForm
+          handleChangeFor={this.handleChangeFor}
+          handleSubmit={this.handleSubmit}
+          newStar={this.state.newStar}
+        />
+        <StarList listOfStars={this.state.starList} />
+        <Footer />
       </div>
     );
   }
