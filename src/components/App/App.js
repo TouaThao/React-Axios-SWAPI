@@ -8,8 +8,56 @@ class App extends Component {
     super(props);
 
     this.state = {
-      starList : ['Nunki', 'Menkar', 'Polaris']
+      starList : [
+        { name : 'Nunki',
+          diameter: 132 },
+        { name : 'Menkar',
+          diameter: 109 }, 
+        { name : 'Polaris',
+          diameter: 90 }
+      ],
+      newStar : {
+        name : '',
+        diameter: ''
+      }
     }
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+
+    console.log(this.state);
+
+    // take the values on newStar, and add them to starList
+    this.setState({
+      starList : [
+        ...this.state.starList,
+        this.state.newStar
+      ],
+      newStar : {
+        name: '',
+        diameter: ''
+      }
+    })
+  }
+
+  handleNameChange = (event) => {
+    //save whats in the input on newStar.name
+    this.setState({
+      newStar : {
+        ...this.state.newStar,
+        name: event.target.value
+      }
+    })
+  }
+  
+  handleDiameterChange = (event) => {
+    this.setState({
+      newStar : {
+        ...this.state.newStar,
+        diameter: event.target.value
+      }
+    })
   }
 
   render() {
@@ -37,7 +85,11 @@ class App extends Component {
 
     //best map usage
     let starListItemArray = this.state.starList.map ((star, index) => {
-      return <li key={index}>{star}</li>
+      return (
+        <li key={index}>
+          The star "{star.name}" is {star.diameter} million km in diameter.
+        </li>
+      )
     })
   
 
@@ -47,6 +99,13 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
         </header>
+        <form onSubmit={this.handleSubmit}>
+
+          <input value={this.state.newStar.name} placeholder="star name" onChange={this.handleNameChange}/>
+          <input value={this.state.newStar.diameter} placeholder="diameter" onChange={this.handleDiameterChange}/>
+          <input type="submit"/>
+
+        </form>
         <ul className="App-intro">
           {starListItemArray}
         </ul>
