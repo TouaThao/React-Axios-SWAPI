@@ -41,23 +41,17 @@ class App extends Component {
     })
   }
 
-  handleNameChange = (event) => {
-    //save whats in the input on newStar.name
-    this.setState({
-      newStar : {
-        ...this.state.newStar,
-        name: event.target.value
-      }
-    })
-  }
-  
-  handleDiameterChange = (event) => {
-    this.setState({
-      newStar : {
-        ...this.state.newStar,
-        diameter: event.target.value
-      }
-    })
+
+  handleChangeFor = (propertyName) => {
+   return (event) => {
+      //save whats in the input on newStar.name
+      this.setState({
+        newStar : {
+          ...this.state.newStar,
+          [propertyName]: event.target.value
+        }
+      })
+    }
   }
 
   render() {
@@ -101,8 +95,8 @@ class App extends Component {
         </header>
         <form onSubmit={this.handleSubmit}>
 
-          <input value={this.state.newStar.name} placeholder="star name" onChange={this.handleNameChange}/>
-          <input value={this.state.newStar.diameter} placeholder="diameter" onChange={this.handleDiameterChange}/>
+          <input value={this.state.newStar.name} placeholder="star name" onChange={this.handleChangeFor('name')}/>
+          <input value={this.state.newStar.diameter} placeholder="diameter" onChange={this.handleChangeFor('diameter')}/>
           <input type="submit"/>
 
         </form>
