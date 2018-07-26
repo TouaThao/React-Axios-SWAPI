@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
+import Star from '../Star/Star'
 
-class App extends Component {
+class StarList extends Component {
 
   render() {
     //best map usage
     let starListItemArray = this.props.listOfStars.map ((star, index) => {
       return (
-        <li key={index}>
-          The star "{star.name}" is {star.diameter} million km in diameter.
-        </li>
+        <Star starData ={star} key ={index} />
       )
     })
   
@@ -20,4 +19,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default StarList;

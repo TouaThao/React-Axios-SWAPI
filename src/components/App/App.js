@@ -5,6 +5,8 @@ import Footer from '../Footer/Footer';
 import CurrentNewStar from '../CurrentNewStar/CurrentNewStar';
 import StarList from '../StarList/StarList';
 import NewStarForm from '../NewStarForm/NewStarForm';
+import axios from 'axios';
+import PlanetList from '../PlanetList/PlanetList';
 
 class App extends Component {
   
@@ -23,9 +25,32 @@ class App extends Component {
       newStar : {
         name : '',
         diameter: ''
-      }
+      },
+      planetsList: []
     }
   }
+  
+/// will be call once page is load.
+  componentDidMount(){
+    console.log('componeteDidMount')
+    //this is a good place to do a get request
+    this.getPlanets();
+
+  }
+
+  getPlanets(){
+    //Get request
+    axios.get('https://swapi.co/api/planets/?format=json')
+    .then((Response) =>{
+      console.log(Response)
+      this.setState({
+        planetsList : Response.data.results
+      })
+    })
+  }
+
+ 
+  
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -68,6 +93,7 @@ class App extends Component {
           newStar={this.state.newStar}
         />
         <StarList listOfStars={this.state.starList} />
+        <PlanetList listOfPlanets= {this.state.planetsList}/>
         <Footer />
       </div>
     );
