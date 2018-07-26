@@ -25,8 +25,14 @@ class App extends Component {
       newStar : {
         name : '',
         diameter: ''
+        
       },
-      planetsList: []
+      planetsList: [
+        {name:'',
+        rotation_period:'',
+        orbital_period: ''
+        }
+      ]
     }
   }
   

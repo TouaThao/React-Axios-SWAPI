@@ -6,7 +6,8 @@ class Planet extends Component{
         
     return(
         <li>
-        {this.props.PlanetData.name} {this.props.PlanetData.diameter} 
+        The Planet Name is{this.props.PlanetData.name} . Have a rotation period  {this.props.PlanetData.rotation_period} 
+        . And its orbital period is {this.props.PlanetData.orbital_period}
         </li>
     )
   }
